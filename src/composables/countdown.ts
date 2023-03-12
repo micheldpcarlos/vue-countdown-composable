@@ -1,79 +1,92 @@
 import { ref, computed } from "vue";
-import {
-  getMilisecondsDiff,
-  getSecondsDiff,
-  getMinutesDiff,
-  getHoursDiff,
-  getDaysDiff,
-  getWeeksDiff,
-  getMonthsDiff,
-  getYearsDiff,
-} from "../helpers/date";
 
-/**
- *
- * @param date - Countdown date object
- * @param {number} [interval=1000] - Interval time in ms to check the counter
- * @returns
- */
+import {
+  differenceInMilliseconds,
+  differenceInSeconds,
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays,
+  differenceInMonths,
+  differenceInYears,
+  intervalToDuration,
+  isAfter,
+} from "date-fns";
+
 export function useDateCountdown() {
   const countdownDate = ref<Date>(new Date());
   const currentDate = ref(countdownDate.value);
   const countIntervalInMs = ref<number>(1000);
-  const roundValue = ref(true);
+  const separatedValues = ref(false);
 
   const timeInterval = ref<number>(0);
   const initInterval = () => {
+    // first check on init
+    compareDates();
     // clear a possible running interval to avoid untracked duplicates
     clearInterval(timeInterval.value);
-    timeInterval.value = setInterval(() => {
-      const timeDifferenceInMs =
-        countdownDate.value.getTime() - new Date().getTime();
-      if (timeDifferenceInMs <= 0) {
-        clearInterval(timeInterval.value);
-        currentDate.value = countdownDate.value;
-      } else {
-        currentDate.value = new Date();
-      }
-    }, countIntervalInMs.value);
+    // set interval
+    timeInterval.value = setInterval(compareDates, countIntervalInMs.value);
   };
 
-  const remainingMilisseconds = computed(() =>
-    getMilisecondsDiff(currentDate.value, countdownDate.value)
-  );
+  const compareDates = () => {
+    const nowDate = new Date();
+    const diffInMs = differenceInMilliseconds(countdownDate.value, nowDate);
+    if (diffInMs <= 0) {
+      clearInterval(timeInterval.value);
+      currentDate.value = countdownDate.value;
+    } else {
+      currentDate.value = nowDate;
+    }
+  };
+
+  const intervalDurationObject = computed(() => {
+    const intervalD = intervalToDuration({
+      start: currentDate.value,
+      end: countdownDate.value,
+    });
+    return intervalD;
+  });
+
+  const remainingMilisseconds = computed(() => {
+    const difference = differenceInMilliseconds(
+      countdownDate.value,
+      currentDate.value
+    );
+
+    return separatedValues.value ? difference : difference % 1000;
+  });
 
   const remainingSeconds = computed(() => {
-    const difference = getSecondsDiff(currentDate.value, countdownDate.value);
-    return roundValue.value ? Math.round(difference) : difference;
+    if (!separatedValues.value)
+      return intervalDurationObject.value.seconds || 0;
+    return differenceInSeconds(countdownDate.value, currentDate.value);
   });
 
   const remainingMinutes = computed(() => {
-    const difference = getMinutesDiff(currentDate.value, countdownDate.value);
-    return roundValue.value ? Math.round(difference) : difference;
+    if (!separatedValues.value)
+      return intervalDurationObject.value.minutes || 0;
+    return differenceInMinutes(countdownDate.value, currentDate.value);
   });
 
   const remainingHours = computed(() => {
-    const difference = getHoursDiff(currentDate.value, countdownDate.value);
-    return roundValue.value ? Math.round(difference) : difference;
+    if (!separatedValues.value) return intervalDurationObject.value.hours || 0;
+    return differenceInHours(countdownDate.value, currentDate.value);
   });
 
   const remainingDays = computed(() => {
-    const difference = getDaysDiff(currentDate.value, countdownDate.value);
-    return roundValue.value ? Math.round(difference) : difference;
+    if (!separatedValues.value) return intervalDurationObject.value.days || 0;
+    return differenceInDays(countdownDate.value, currentDate.value);
   });
 
-  const remainingWeeks = computed(() => {
-    const difference = getWeeksDiff(currentDate.value, countdownDate.value);
-    return roundValue.value ? Math.round(difference) : difference;
+  const remainingMonths = computed(() => {
+    if (!separatedValues.value) return intervalDurationObject.value.months || 0;
+    return differenceInMonths(countdownDate.value, currentDate.value);
   });
 
-  const remainingMonths = computed(() =>
-    getMonthsDiff(currentDate.value, countdownDate.value)
-  );
-
-  const remainingYears = computed(() =>
-    getYearsDiff(currentDate.value, countdownDate.value)
-  );
+  const remainingYears = computed(() => {
+    if (!separatedValues.value) return intervalDurationObject.value.years || 0;
+    return differenceInYears(countdownDate.value, currentDate.value);
+  });
 
   /**
    * Pause the countdown.
@@ -89,45 +102,58 @@ export function useDateCountdown() {
    * If you want a more controllable counter, please use the NumberCountdown
    */
   const resumeCountdown = () => {
+    clearInterval(timeInterval.value);
     const currentNewDate = new Date();
-    const countDownDiff =
-      countdownDate.value.getTime() - currentNewDate.getTime();
+    const diffInMs = differenceInMilliseconds(
+      countdownDate.value,
+      currentNewDate
+    );
 
-    if (countDownDiff > 0) {
+    if (diffInMs > 0) {
       currentDate.value = currentNewDate;
       initInterval();
     } else {
-      // reset to zero if less than zero (you're trying to start a not started or a passed countdown)
+      // reset to zero if not positive
+      // the user is resuming a countdown that ended
       currentDate.value = countdownDate.value;
     }
   };
 
+  /**
+   *
+   * @param date - Date to start countdown towards
+   * @param updateInterval - Interval time in ms to check the counter - default 1000
+   * @param separated - If set to true, each one of the counter will return the total remaining converted (e.g { seconds: 120, minutes 2 })
+   */
   const startCountdown = (
     date: Date,
-    interval: number = 1000,
-    round: boolean = true
+    updateInterval: number = 1000,
+    separated: boolean = false
   ) => {
-    // Clear a possible previsous interval before starting so the user can use it to start with different parameters
+    // Clear a possible previsous interval before starting
+    // to make it possible to the user restart with different parameters
     clearInterval(timeInterval.value);
 
     // Check the date before starting
-    if (date instanceof Date && date > new Date()) {
+    const nowDate = new Date();
+    if (isAfter(date, nowDate)) {
       countdownDate.value = date;
+      currentDate.value = nowDate;
     } else {
-      console.error("Invalid countdown date");
       // reset to zero on error
-      countdownDate.value = new Date();
+      countdownDate.value = nowDate;
       currentDate.value = countdownDate.value;
     }
 
-    if (typeof interval !== "number" && interval <= 0) {
+    if (typeof updateInterval !== "number" || updateInterval <= 0) {
       console.warn("Invalid countInterval parameter, using default 1000ms");
       countIntervalInMs.value = 1000;
     } else {
-      countIntervalInMs.value = interval;
+      countIntervalInMs.value = updateInterval;
     }
 
-    roundValue.value = !!round;
+    // define if the returning values are calculated separated
+    separatedValues.value = !!separated;
 
     initInterval();
   };
@@ -138,7 +164,6 @@ export function useDateCountdown() {
     minutes: remainingMinutes,
     hours: remainingHours,
     days: remainingDays,
-    weeks: remainingWeeks,
     months: remainingMonths,
     years: remainingYears,
     start: startCountdown,

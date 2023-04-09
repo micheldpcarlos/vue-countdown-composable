@@ -1,0 +1,44 @@
+.image-bg {
+  animation: rotate 20s linear infinite;
+}
+
+.tagline {
+  color: var(--vp-c-text-1) !important;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    filter: blur(72px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(360deg);
+    filter: blur(40px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(720deg);
+    filter: blur(72px);
+  }
+}
+
+.demo-button {
+  padding: 3px 15px;
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+  padding: 0 20px;
+  line-height: 38px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+  font-size: 1rem;
+  vertical-align: middle;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+
+  &:hover {
+    background-color: var(--vp-c-brand-dark);
+  }
+}

@@ -47,7 +47,7 @@ export function useDateCountdown() {
     });
   });
 
-  const remainingMilisseconds = computed(() => {
+  const remainingMiliseconds = computed(() => {
     const difference = differenceInMilliseconds(
       countdownDate.value,
       currentDate.value
@@ -124,7 +124,7 @@ export function useDateCountdown() {
    *
    * @param date - Date to start countdown towards
    * @param updateInterval - Interval time in ms to check the counter - default 1000
-   * @param separated - If set to true, each one of the counter will return the total remaining converted (e.g { milisseconds: 120.000 seconds: 120, minutes 2 })
+   * @param separated - If set to true, each one of the counter will return the total remaining converted (e.g { miliseconds: 120.000 seconds: 120, minutes 2 })
    */
   const startCountdown = (
     date: Date,
@@ -160,7 +160,7 @@ export function useDateCountdown() {
   };
 
   return {
-    milisseconds: remainingMilisseconds,
+    miliseconds: remainingMiliseconds,
     seconds: remainingSeconds,
     minutes: remainingMinutes,
     hours: remainingHours,
@@ -198,7 +198,7 @@ export function useNumberCountdown() {
     }, countIntervalInMs.value);
   };
 
-  const remainingMilisseconds = computed(() => {
+  const remainingMiliseconds = computed(() => {
     if (!separatedValues.value)
       return intervalDurationObject.value.seconds || 0;
     return differenceInSeconds(countdownDate.value, currentDate.value);
@@ -306,7 +306,7 @@ export function useNumberCountdown() {
 
   // expose managed state as return value
   return {
-    miliseconds: remainingMilisseconds,
+    miliseconds: remainingMiliseconds,
     seconds: remainingSeconds,
     minutes: remainingMinutes,
     hours: remainingHours,

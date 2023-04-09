@@ -60,6 +60,7 @@ defineProps<{
     .value {
       font-weight: bold;
       font-size: 28px;
+      color: var(--vp-c-white);
     }
     .label {
       font-size: 12px;

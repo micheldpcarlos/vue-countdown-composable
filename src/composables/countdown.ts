@@ -95,6 +95,11 @@ export function useDateCountdown() {
     clearInterval(timeInterval.value);
   };
 
+  const stopCountdon = () => {
+    clearInterval(timeInterval.value);
+    currentDate.value = countdownDate.value;
+  };
+
   /**
    * Resume the countdown.
    *
@@ -170,6 +175,7 @@ export function useDateCountdown() {
     start: startCountdown,
     pause: pauseCountdown,
     resume: resumeCountdown,
+    stop: stopCountdon,
   };
 }
 

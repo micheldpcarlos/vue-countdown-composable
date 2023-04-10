@@ -36,7 +36,7 @@ const selectedDate = ref("");
       :years="years"
     />
 
-    <button class="demo-button" @click="start(new Date('2023-08-13'), 100)">
+    <button class="demo-button" @click="start(new Date('2023-08-13'), 10)">
       start countdown
     </button>
   </DemoBlock>

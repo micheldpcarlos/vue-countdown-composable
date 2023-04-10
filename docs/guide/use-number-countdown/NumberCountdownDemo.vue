@@ -22,7 +22,6 @@ const {
 } = useDateCountdown();
 
 const selectedDate = ref("");
-const UPDATE_INTERVAL_MS = 100;
 </script>
 
 <template>
@@ -37,10 +36,7 @@ const UPDATE_INTERVAL_MS = 100;
       :years="years"
     />
 
-    <button
-      class="demo-button"
-      @click="start(new Date('2040-08-13'), UPDATE_INTERVAL_MS)"
-    >
+    <button class="demo-button" @click="start(new Date('2023-08-13'), 100)">
       start countdown
     </button>
   </DemoBlock>

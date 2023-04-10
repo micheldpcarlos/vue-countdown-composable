@@ -1,7 +1,7 @@
-# useDataCountdown
-
-<DataCountdownDemo />
+# useNumberCountdown
+## Demo
+<NumberCountdownDemo />
 
 <script setup>
-import DataCountdownDemo from './DataCountdownDemo.vue';
+import NumberCountdownDemo from './NumberCountdownDemo.vue';
 </script>

@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref, computed, onUnmounted } from "vue";
 
 import {
   differenceInMilliseconds,
@@ -163,6 +163,11 @@ export function useDateCountdown() {
 
     initInterval();
   };
+
+  // Remove Interval onUnmount to avoid memory leak
+  onUnmounted(() => {
+    clearInterval(timeInterval.value);
+  });
 
   return {
     miliseconds: remainingMiliseconds,

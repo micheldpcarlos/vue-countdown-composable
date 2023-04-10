@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useDateCountdown } from "../../../src/composables/countdown";
-import DemoCounter from "../common/DemoCounter.vue";
-import DemoBlock from "../common/DemoBlock.vue";
+import DemoBlock from "../common/DemoBlockWrapper.vue";
+import DemoCounter from "../common/DemoCounterComponent.vue";
 
 const {
   miliseconds,

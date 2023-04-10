@@ -1,0 +1,19 @@
+{
+  "hash": "15cc8bd3",
+  "browserHash": "484a5305",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "28b6678a",
+      "needsInterop": false
+    },
+    "date-fns": {
+      "src": "../../../../node_modules/date-fns/esm/index.js",
+      "file": "date-fns.js",
+      "fileHash": "0239493f",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}

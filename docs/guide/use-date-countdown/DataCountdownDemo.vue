@@ -15,6 +15,7 @@ const {
   start,
   pause,
   resume,
+  stop,
 } = useDateCountdown();
 
 const selectedDate = ref("");

@@ -1,7 +1,7 @@
 {
   "name": "vue-countdown-composable",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1_beta",
   "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev docs",

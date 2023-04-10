@@ -41,7 +41,7 @@ export default defineConfig({
       "link",
       {
         rel: "icon",
-        href: "../vue-countdown-composable/favicon.ico",
+        href: "/vue-countdown-composable/favicon.ico",
         type: "image/x-icon",
       },
     ],

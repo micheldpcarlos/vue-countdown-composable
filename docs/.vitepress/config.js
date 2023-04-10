@@ -4,6 +4,7 @@ export default defineConfig({
   title: "Vue Countdown",
   description: "Easy to use Vue 3 countdown composables",
   lang: "en-US",
+  base: "/vue-countdown-composable/",
   ignoreDeadLinks: true,
   themeConfig: {
     logo: "/favicon.svg",

@@ -4,6 +4,9 @@ import { useDateCountdown } from "../../../src/composables/countdown";
 import DemoBlock from "../common/DemoBlockWrapper.vue";
 import DemoCounter from "../common/DemoCounterComponent.vue";
 
+const demoFileLink =
+  "https://github.com/micheldpcarlos/vue-countdown-composable/blob/main/docs/guide/use-date-countdown/DataCountdownDemo.vue";
+
 const {
   miliseconds,
   seconds,
@@ -23,7 +26,7 @@ const selectedDate = ref("");
 </script>
 
 <template>
-  <DemoBlock repository-link="http://uol.com">
+  <DemoBlock :repository-link="demoFileLink">
     <DemoCounter
       :miliseconds="miliseconds"
       :seconds="seconds"

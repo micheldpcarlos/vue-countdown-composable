@@ -7,7 +7,7 @@ export default defineConfig({
   base: "/vue-countdown-composable/",
   ignoreDeadLinks: true,
   themeConfig: {
-    logo: "/favicon.svg",
+    logo: "/icon.svg",
 
     footer: {
       message: "Released under the MIT License.",
@@ -36,7 +36,7 @@ export default defineConfig({
   },
   head: [
     ["meta", { name: "theme-color", content: "#ffffff" }],
-    ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+    ["link", { rel: "icon", href: "/favicon.ico", type:"image/x-icon" }],
     ["meta", { name: "author", content: "Michel Carlos" }],
     ["meta", { property: "og:title", content: "Vue Countdown Composables" }],
     [

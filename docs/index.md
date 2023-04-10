@@ -5,7 +5,7 @@ hero:
   name: Vue Countdown
   tagline: Easy to use Vue 3 countdown composables
   image:
-    src: /favicon.svg
+    src: /icon.svg
     alt: vue-countdown-composable
   actions:
     - theme: brand

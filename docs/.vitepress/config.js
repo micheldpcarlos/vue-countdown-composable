@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-import { withBase } from "vitepress";
 
 export default defineConfig({
   title: "Vue Countdown",
@@ -42,7 +41,7 @@ export default defineConfig({
       "link",
       {
         rel: "icon",
-        href: "../vue-countdown-composable/favicon.ico",
+        href: "./vue-countdown-composable/favicon.ico",
         type: "image/x-icon",
       },
     ],

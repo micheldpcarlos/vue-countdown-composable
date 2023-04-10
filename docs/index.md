@@ -3,6 +3,7 @@ layout: home
 
 hero:
   name: Vue Countdown
+  text: Composable
   tagline: Easy to use Vue 3 countdown composables
   image:
     src: /icon.svg

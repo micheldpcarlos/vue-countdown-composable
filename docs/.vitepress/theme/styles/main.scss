@@ -2,10 +2,6 @@
   animation: rotate 20s linear infinite;
 }
 
-.tagline {
-  color: var(--vp-c-text-1) !important;
-}
-
 @keyframes rotate {
   0% {
     transform: translate(-50%, -50%) rotate(0deg);

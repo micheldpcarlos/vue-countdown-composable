@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import { withBase } from "vitepress";
 
 export default defineConfig({
   title: "Vue Countdown",
@@ -36,7 +37,15 @@ export default defineConfig({
   },
   head: [
     ["meta", { name: "theme-color", content: "#ffffff" }],
-    ["link", { rel: "icon", href: "./favicon.ico", type:"image/x-icon" }],
+    // TODO: Check the possibility to make it dynamic
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "../vue-countdown-composable/favicon.ico",
+        type: "image/x-icon",
+      },
+    ],
     ["meta", { name: "author", content: "Michel Carlos" }],
     ["meta", { property: "og:title", content: "Vue Countdown Composables" }],
     [

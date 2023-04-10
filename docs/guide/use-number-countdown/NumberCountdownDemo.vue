@@ -5,7 +5,7 @@ import DemoBlock from "../common/DemoBlockWrapper.vue";
 import DemoCounter from "../common/DemoCounterComponent.vue";
 
 const demoFileLink =
-  "https://github.com/micheldpcarlos/vue-countdown-composable/blob/main/docs/guide/use-date-countdown/DataCountdownDemo.vue";
+  "https://github.com/micheldpcarlos/vue-countdown-composable/blob/main/docs/guide/use-number-countdown/NumberCountdownDemo.vue";
 
 const {
   miliseconds,

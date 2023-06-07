@@ -10,7 +10,6 @@
     "build": "vue-tsc && vite build"
   },
   "dependencies": {
-    "date-fns": "^2.29.3",
     "vue": "^3.2.45"
   },
   "devDependencies": {

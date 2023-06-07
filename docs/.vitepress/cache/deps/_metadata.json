@@ -1,17 +1,11 @@
 {
-  "hash": "60db468d",
-  "browserHash": "cad20909",
+  "hash": "a0fe9ff9",
+  "browserHash": "29226889",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "953bf905",
-      "needsInterop": false
-    },
-    "date-fns": {
-      "src": "../../../../node_modules/date-fns/esm/index.js",
-      "file": "date-fns.js",
-      "fileHash": "781f0389",
+      "fileHash": "6327fe8f",
       "needsInterop": false
     }
   },
